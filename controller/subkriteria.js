@@ -25,3 +25,16 @@ export const addSubkriteria = async (req, res) => {
         res.status(500).json({ message: 'Terjadi kesalahan pada server.' });
     }
 };
+
+export const dataSubKriteria = async (req,res) => {
+    
+    // query tampilkan data
+    const selectSubKriteria = 'SELECT * FROM subkriteria'
+
+    try{
+        const result = await query(selectSubKriteria)
+        res.status(200).json(result)
+    }catch(error){
+        res.status(500).json({message: 'Terjadi kesalahan pada server.'})
+    }
+}

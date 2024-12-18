@@ -24,3 +24,16 @@ export const addKriteria = async (req, res) => {
         res.status(500).json({ message: 'Terjadi kesalahan pada server.' });
     }
 };
+
+export const dataKriteria = async (req,res) => {
+    
+    // query tampilkan data
+    const selectKriteria = 'SELECT * FROM kriteria'
+
+    try{
+        const result = await query(selectKriteria)
+        res.status(200).json(result)
+    }catch(error){
+        res.status(500).json({message: 'Terjadi kesalahan pada server.'})
+    }
+}

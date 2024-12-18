@@ -40,3 +40,16 @@ export const addPenilaian = async (req, res) => {
         res.status(500).json({ message: 'Terjadi kesalahan pada server.', error: error.message });
     }
 };
+
+export const dataPenilaian = async (req,res) => {
+    
+    // query tampilkan data
+    const selectPenilaian = 'SELECT * FROM penilaian'
+
+    try{
+        const result = await query(selectPenilaian)
+        res.status(200).json(result)
+    }catch(error){
+        res.status(500).json({message: 'Terjadi kesalahan pada server.'})
+    }
+}

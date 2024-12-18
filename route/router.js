@@ -1,9 +1,9 @@
 import express from "express";
 import { login, register } from "../controller/users.js";
-import { addKriteria } from "../controller/kriteria.js";
-import { addSubkriteria } from "../controller/subkriteria.js";
-import { addAlternatif } from "../controller/alternatif.js";
-import { addPenilaian } from "../controller/penilaian.js";
+import { addKriteria, dataKriteria } from "../controller/kriteria.js";
+import { addSubkriteria, dataSubKriteria } from "../controller/subkriteria.js";
+import { addAlternatif, dataAlternatif } from "../controller/alternatif.js";
+import { addPenilaian, dataPenilaian } from "../controller/penilaian.js";
 import { calculateMABAC } from "../controller/mabac.js";
 
 const router = express.Router();
@@ -14,15 +14,19 @@ router.post('/register', register)
 
 // kriteria
 router.post('/addkriteria', addKriteria)
+router.get('/kriteria', dataKriteria)
 
 // subkriteria
 router.post('/addsubkriteria', addSubkriteria)
+router.get('/subkriteria', dataSubKriteria)
 
 // alternatif
 router.post('/addalternatif', addAlternatif)
+router.get('/alternatif', dataAlternatif)
 
 // penilaian
 router.post('/addpenilaian', addPenilaian)
+router.get('/penilaian', dataPenilaian)
 
 // perhitungan
 router.get('/kalkulasi', calculateMABAC)

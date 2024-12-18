@@ -36,3 +36,16 @@ export const addAlternatif = async (req, res) => {
         res.status(500).json({ message: 'Terjadi kesalahan pada server.', error: error.message });
     }
 };
+
+export const dataAlternatif = async (req,res) => {
+    
+    // query tampilkan data
+    const selectAlternatif = 'SELECT * FROM alternatif'
+
+    try{
+        const result = await query(selectAlternatif)
+        res.status(200).json(result)
+    }catch(error){
+        res.status(500).json({message: 'Terjadi kesalahan pada server.'})
+    }
+}
