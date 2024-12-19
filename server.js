@@ -17,10 +17,10 @@ try {
     console.log('batal terhubung',error);
 }
 
-
 app.use(cors());
 app.use(cookieParser());
 app.use(express.json());
 app.use(router);
 
-app.listen(PORT, ()=> console.log(`Server running at port ${PORT}`));
+const runApp = app.listen(PORT, ()=> console.log(`Server running at port ${PORT}`));
+runApp.timeout = 120000;
