@@ -55,7 +55,7 @@ export const changeKriteria = async (req, res) => {
 export const dataKriteria = async (req,res) => {
     
     // query tampilkan data
-    const selectKriteria = 'SELECT * FROM kriteria'
+    const selectKriteria = 'SELECT * FROM kriteria ORDER BY bobot DESC'
 
     try{
         const result = await query(selectKriteria)

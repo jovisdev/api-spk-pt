@@ -1,8 +1,8 @@
 import express from "express";
 import { login, register } from "../controller/users.js";
 import { addKriteria, changeKriteria, dataKriteria, hapusKriteria } from "../controller/kriteria.js";
-import { addSubkriteria, dataSubKriteria } from "../controller/subkriteria.js";
-import { addAlternatif, dataAlternatif } from "../controller/alternatif.js";
+import { addSubkriteria, changeSubKriteria, dataSubKriteria, deleteSubKriteria } from "../controller/subkriteria.js";
+import { addAlternatif, changeAlternatif, dataAlternatif, deleteAlternatif } from "../controller/alternatif.js";
 import { addPenilaian, dataPenilaian } from "../controller/penilaian.js";
 import { calculateMABAC } from "../controller/mabac.js";
 
@@ -20,10 +20,14 @@ router.get('/kriteria', dataKriteria)
 
 // subkriteria
 router.post('/addsubkriteria', addSubkriteria)
+router.put('/changesubkriteria/:subkriteriaId', changeSubKriteria)
+router.delete('/deletesubkriteria/:subkriteriaId', deleteSubKriteria)
 router.get('/subkriteria', dataSubKriteria)
 
 // alternatif
 router.post('/addalternatif', addAlternatif)
+router.put('/changealternatif/:alternatifId', changeAlternatif)
+router.delete('/deletealternatif/:alternatifId', deleteAlternatif)
 router.get('/alternatif', dataAlternatif)
 
 // penilaian

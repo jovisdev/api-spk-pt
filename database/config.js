@@ -6,6 +6,9 @@ const db = mysql.createPool ({
     user: process.env.USER,
     password: process.env.PASSWORD,
     database: process.env.DATABASE,
+    waitForConnections: true,
+    connectionLimit: 10,
+    queueLimit: 0,
 })
 
 async function query(command, values) {
@@ -13,7 +16,7 @@ async function query(command, values) {
         const [results] = await db.query(command, values ?? [])
         return results;
     } catch (error) {
-        console.log(error);
+        throw error;
     }
 }
 
