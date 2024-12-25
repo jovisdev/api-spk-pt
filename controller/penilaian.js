@@ -119,10 +119,23 @@ export const deletePenilaian = async (req, res) => {
     }
 }
 
-export const dataPenilaian = async (req,res) => {
+export const konversiPenilaian = async (req,res) => {
     
     // query tampilkan data
     const selectPenilaian = 'SELECT * FROM penilaian'
+
+    try{
+        const result = await query(selectPenilaian)
+        res.status(200).json(result)
+    }catch(error){
+        res.status(500).json({message: 'Terjadi kesalahan pada server.'})
+    }
+}
+
+export const dataAwalPenilaian = async (req,res) => {
+    
+    // query tampilkan data
+    const selectPenilaian = "SELECT p.id, p.alternatif_id, p.kriteria_id, CASE WHEN k.tipe = 'Kualitatif' THEN s.subkriteria ELSE CAST(p.nilai AS CHAR) END AS nilai FROM penilaian p INNER JOIN kriteria k ON p.kriteria_id = k.id LEFT JOIN subkriteria s ON k.tipe = 'Kualitatif' AND p.nilai = s.bobot"
 
     try{
         const result = await query(selectPenilaian)
