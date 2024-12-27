@@ -1,7 +1,7 @@
 import { query } from "../database/config.js";
 
 // Controller untuk perhitungan MABAC
-export const calculateMABAC = async (req, res) => {
+export const getPrepareCalculation = async (req, res) => {
     try {
         // Ambil data dari tabel `penilaian`
         const penilaianQuery = `
