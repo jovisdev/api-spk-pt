@@ -4,7 +4,7 @@ import { addKriteria, changeKriteria, dataKriteria, hapusKriteria } from "../con
 import { addSubkriteria, changeSubKriteria, dataSubKriteria, deleteSubKriteria } from "../controller/subkriteria.js";
 import { addAlternatif, changeAlternatif, dataAlternatif, deleteAlternatif } from "../controller/alternatif.js";
 import { dataAwalPenilaian, deletePenilaian, konversiPenilaian, upsertPenilaian } from "../controller/penilaian.js";
-import { getPrepareCalculation } from "../controller/mabac.js";
+import { addResult, getPrepareCalculation, getResult } from "../controller/mabac.js";
 
 const router = express.Router();
 
@@ -38,5 +38,7 @@ router.get('/datapenilaian', dataAwalPenilaian)
 
 // perhitungan
 router.get('/getdataprepare', getPrepareCalculation)
+router.get('/dataresult', getResult)
+router.post('/addresult', addResult)
 
 export default router;

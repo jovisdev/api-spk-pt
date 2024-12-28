@@ -123,3 +123,26 @@ export const getPrepareCalculation = async (req, res) => {
         res.status(500).json({ message: "Terjadi kesalahan pada server.", error: error.message });
     }
 };
+
+export const addResult = async (req, res) => {
+    const { alternatif, score } = req.body;
+    try {
+        const insertQuery = `INSERT INTO perhitungan ( alternatif, score) VALUES (?, ?)`;
+        await query(insertQuery, [alternatif, score]);
+        res.status(201).json({ message: "Data berhasil ditambahkan." });
+    } catch (error) {
+        console.error("Error:", error);
+        res.status(500).json({ message: "Terjadi kesalahan pada server.", error: error.message });
+    }
+}
+
+export const getResult = async (req, res) => {
+    try {
+        const selectQuery = `SELECT * FROM perhitungan`;
+        const results = await query(selectQuery);
+        res.status(200).json(results);
+    } catch (error) {
+        console.error("Error:", error);
+        res.status(500).json({ message: "Terjadi kesalahan pada server.", error: error.message });
+    }
+}
