@@ -1,5 +1,5 @@
 import express from "express";
-import { login, register } from "../controller/users.js";
+import { deleteUser, getUsers, login, register } from "../controller/users.js";
 import { addKriteria, changeKriteria, dataKriteria, hapusKriteria } from "../controller/kriteria.js";
 import { addSubkriteria, changeSubKriteria, dataSubKriteria, deleteSubKriteria } from "../controller/subkriteria.js";
 import { addAlternatif, changeAlternatif, dataAlternatif, deleteAlternatif } from "../controller/alternatif.js";
@@ -11,6 +11,8 @@ const router = express.Router();
 // users
 router.post('/login', login)
 router.post('/register', register)
+router.get('/users', getUsers)
+router.delete('/deleteuser/:userId', deleteUser)
 
 // kriteria
 router.post('/addkriteria', addKriteria)

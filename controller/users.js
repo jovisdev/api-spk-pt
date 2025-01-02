@@ -5,7 +5,7 @@ import jwt from "jsonwebtoken";
 export const getUsers = async(req,res) => {
     try {
         const result = await query("SELECT id, nama, jabatan FROM users");
-        return res.status(200).json({data: result});
+        return res.status(200).json(result);
     } catch (error) {
         console.log(error);
     }
@@ -102,5 +102,28 @@ export const logout = async (req, res) => {
     } catch (error) {
         console.error(error);
         return res.sendStatus(500);
+    }
+};
+
+// hapus users
+export const deleteUser = async (req, res) => {
+    const { userId } = req.params; // ID dari kriteria yang ingin dihapus
+
+    const getUserQuery = `SELECT nama FROM users WHERE id = ?`;
+
+    const deleteUserQuery = `DELETE FROM users WHERE id = ?`;
+
+    try {
+        // Ambil nama alternatif terlebih dahulu
+        const [users] = await query(getUserQuery, userId);
+
+        // Hapus kriteria
+        await query(deleteUserQuery, userId);
+
+        // Kirim respons sukses dengan nama kriteria
+        res.status(200).json({message: `User atas nama ${users.nama} berhasil dihapus.`});
+    } catch (error) {
+        console.error('Error:', error); // Log kesalahan untuk debugging
+        res.status(500).json({ message: 'Terjadi kesalahan pada server.' });
     }
 };
