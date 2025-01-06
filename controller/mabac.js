@@ -124,11 +124,34 @@ export const getPrepareCalculation = async (req, res) => {
     }
 };
 
-export const addResult = async (req, res) => {
-    const { alternatif, score } = req.body;
+export const addReport = async (req, res) => {
+    const { userId, jumlah_alternatif } = req.body;
     try {
-        const insertQuery = `INSERT INTO perhitungan ( alternatif, score) VALUES (?, ?)`;
-        await query(insertQuery, [alternatif, score]);
+        const insertQuery = `INSERT INTO laporan ( user_id, jumlah_alternatif) VALUES (?, ?)`;
+        await query(insertQuery, [userId, jumlah_alternatif]);
+        res.status(201).json({ message: "Data berhasil ditambahkan." });
+    } catch (error) {
+        console.error("Error:", error);
+        res.status(500).json({ message: "Terjadi kesalahan pada server.", error: error.message });
+    }
+}
+
+export const getReport = async (req, res) => {
+    try {
+        const selectQuery = `SELECT users.id AS users_id,users.nama,users.jabatan,jumlah_alternatif,created_at FROM laporan INNER JOIN users ON laporan.user_id = users.id`;
+        const results = await query(selectQuery);
+        res.status(200).json(results);
+    } catch (error) {
+        console.error("Error:", error);
+        res.status(500).json({ message: "Terjadi kesalahan pada server.", error: error.message });
+    }
+}
+
+export const addResult = async (req, res) => {
+    const { alternatif, score, laporan_id } = req.body;
+    try {
+        const insertQueryResult = `INSERT INTO perhitungan ( alternatif, score, laporan_id) VALUES (?, ?, ?)`;
+        await query(insertQueryResult, [alternatif, score, laporan_id]);
         res.status(201).json({ message: "Data berhasil ditambahkan." });
     } catch (error) {
         console.error("Error:", error);
@@ -137,10 +160,22 @@ export const addResult = async (req, res) => {
 }
 
 export const getResult = async (req, res) => {
+    const { laporan_id } = req.body;
     try {
-        const selectQuery = `SELECT * FROM perhitungan`;
-        const results = await query(selectQuery);
+        const selectQuery = `SELECT * FROM perhitungan where laporan_id = ?`;
+        const results = await query(selectQuery,[laporan_id]);
         res.status(200).json(results);
+    } catch (error) {
+        console.error("Error:", error);
+        res.status(500).json({ message: "Terjadi kesalahan pada server.", error: error.message });
+    }
+}
+
+export const resetResult = async (req, res) => {
+    try {
+        const deleteQuery = `DELETE FROM perhitungan`;
+        const results = await query(deleteQuery);
+        res.status(200).json({ message: "Data berhasil direset." , results});
     } catch (error) {
         console.error("Error:", error);
         res.status(500).json({ message: "Terjadi kesalahan pada server.", error: error.message });
