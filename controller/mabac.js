@@ -138,7 +138,7 @@ export const addReport = async (req, res) => {
 
 export const getReport = async (req, res) => {
     try {
-        const selectQuery = `SELECT users.id AS users_id,users.nama,users.jabatan,jumlah_alternatif,created_at FROM laporan INNER JOIN users ON laporan.user_id = users.id`;
+        const selectQuery = `SELECT laporan.id, users.id AS users_id,users.nama,users.jabatan,laporan.jumlah_alternatif,laporan.created_at FROM laporan INNER JOIN users ON laporan.user_id = users.id`;
         const results = await query(selectQuery);
         res.status(200).json(results);
     } catch (error) {
@@ -160,10 +160,10 @@ export const addResult = async (req, res) => {
 }
 
 export const getResult = async (req, res) => {
-    const { laporan_id } = req.body;
+    const { laporan_id } = req.params;
     try {
         const selectQuery = `SELECT * FROM perhitungan where laporan_id = ?`;
-        const results = await query(selectQuery,[laporan_id]);
+        const results = await query(selectQuery,laporan_id);
         res.status(200).json(results);
     } catch (error) {
         console.error("Error:", error);
@@ -172,10 +172,13 @@ export const getResult = async (req, res) => {
 }
 
 export const resetResult = async (req, res) => {
+    const { laporan_id } = req.params;
     try {
-        const deleteQuery = `DELETE FROM perhitungan`;
-        const results = await query(deleteQuery);
-        res.status(200).json({ message: "Data berhasil direset." , results});
+        const deleteQueryResult = `DELETE FROM perhitungan where laporan_id = ?`;
+        const deleteQueryReport = `DELETE FROM laporan where id = ?`;
+        await query(deleteQueryResult,laporan_id);
+        await query(deleteQueryReport,laporan_id);
+        res.status(200).json({ message: "Data berhasil dihapus." });
     } catch (error) {
         console.error("Error:", error);
         res.status(500).json({ message: "Terjadi kesalahan pada server.", error: error.message });

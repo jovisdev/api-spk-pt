@@ -98,21 +98,15 @@ export const upsertPenilaian = async (req, res) => {
 
 
 export const deletePenilaian = async (req, res) => {
-    const { penilaianId } = req.params;
-
     // Query untuk menghapus data penilaian
     const deletePenilaianQuery = `
         DELETE FROM penilaian
-        WHERE id = ?
     `;
 
     try {
         // Eksekusi query
-        const result = await query(deletePenilaianQuery, [penilaianId]);
-        if (result.affectedRows === 0) {
-            return res.status(404).json({ message: 'Penilaian not found' });
-        }
-        res.status(200).json({ message: 'Data penilaian berhasil dihapus.' });
+        const result = await query(deletePenilaianQuery);
+        res.status(200).json({ message: 'Data penilaian berhasil dihapus.', result });
     } catch (error) {
         console.error(error);
         res.status(500).json({ message: 'Terjadi kesalahan pada server.' });
@@ -135,7 +129,7 @@ export const konversiPenilaian = async (req,res) => {
 export const dataAwalPenilaian = async (req,res) => {
     
     // query tampilkan data
-    const selectPenilaian = "SELECT p.id, p.alternatif_id, p.kriteria_id, CASE WHEN k.tipe = 'Kualitatif' THEN s.subkriteria ELSE CAST(p.nilai AS CHAR) END AS nilai FROM penilaian p INNER JOIN kriteria k ON p.kriteria_id = k.id LEFT JOIN subkriteria s ON k.tipe = 'Kualitatif' AND p.nilai = s.bobot"
+    const selectPenilaian = "SELECT p.id, p.alternatif_id, p.kriteria_id, CASE WHEN k.tipe = 'Kualitatif' THEN (SELECT s.subkriteria FROM subkriteria s WHERE s.kriteria_id = p.kriteria_id AND p.nilai = s.bobot) ELSE CAST(p.nilai AS CHAR) END AS nilai FROM penilaian p INNER JOIN kriteria k ON p.kriteria_id = k.id"
 
     try{
         const result = await query(selectPenilaian)

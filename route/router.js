@@ -34,7 +34,7 @@ router.get('/alternatif', dataAlternatif)
 
 // penilaian
 router.post('/addpenilaian', upsertPenilaian)
-router.delete('/deletepenilaian/:penilaianId', deletePenilaian)
+router.delete('/deletepenilaian', deletePenilaian)
 router.get('/konversinilai', konversiPenilaian)
 router.get('/datapenilaian', dataAwalPenilaian)
 
@@ -44,8 +44,8 @@ router.post('/addreport', addReport)
 
 // perhitungan
 router.get('/getdataprepare', getPrepareCalculation)
-router.post('/dataresult', getResult)
+router.get('/dataresult/:laporan_id', getResult)
 router.post('/addresult', addResult)
-router.delete('/deleteresult', resetResult)
+router.delete('/deleteresult/:laporan_id', resetResult)
 
 export default router;
