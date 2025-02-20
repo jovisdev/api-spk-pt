@@ -4,7 +4,7 @@ import jwt from "jsonwebtoken";
 
 export const getUsers = async(req,res) => {
     try {
-        const result = await query("SELECT id, nama, jabatan FROM users");
+        const result = await query("SELECT id, nama, jabatan FROM users WHERE jabatan <> 'Super Admin'");
         return res.status(200).json(result);
     } catch (error) {
         console.log(error);
