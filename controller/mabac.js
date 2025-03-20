@@ -21,7 +21,7 @@ export const getPrepareCalculation = async (req, res) => {
             return res.status(404).json({ message: "Data penilaian, alternatif, atau kriteria tidak ditemukan." });
         }
 
-        // Format data ke dalam matriks alternatif-kriteria
+        // Tahap 1 : Format data ke dalam matriks alternatif-kriteria
         const dataMatrix = {};
         alternatif.forEach((alt) => {
             dataMatrix[alt.id] = {};
@@ -33,7 +33,7 @@ export const getPrepareCalculation = async (req, res) => {
             });
         });
 
-        // Tahap 1: Normalisasi Matriks
+        // Tahap 2 : Normalisasi Matriks
         const normalizedMatrix = {};
         kriteria.forEach((krit) => {        
             const values = Object.values(dataMatrix).map((alt) => alt[krit.id] || 0);
@@ -62,7 +62,7 @@ export const getPrepareCalculation = async (req, res) => {
             });
         });
         
-        // Tahap 2: Matriks Ternormalisasi Terbobot
+        // Tahap 3 : Matriks Ternormalisasi Terbobot
         const weightedMatrix = {};
         kriteria.forEach((krit) => {
             const bobot = penilaian.find((p) => p.kriteria_id === krit.id).bobot;
@@ -73,6 +73,7 @@ export const getPrepareCalculation = async (req, res) => {
             });
         });
 
+        // Tahap 4 : Menghitung Area Batas
         const borderMatrix = {};
         kriteria.forEach((krit) => {
             // Ambil nilai untuk setiap kriteria dari weightedMatrix
@@ -89,7 +90,7 @@ export const getPrepareCalculation = async (req, res) => {
         });
 
 
-        // Tahap 4: Hitung Jarak ke Area Batas
+        // Tahap 5 : Hitung Jarak ke Area Batas
         const distanceMatrix = {};
         alternatif.forEach((alt) => {
             distanceMatrix[alt.id] = Object.keys(borderMatrix).reduce((sum, kritId) => {
@@ -98,7 +99,7 @@ export const getPrepareCalculation = async (req, res) => {
             distanceMatrix[alt.id] = parseFloat(distanceMatrix[alt.id].toFixed(4));
         });
 
-        // Hasil Akhir: Urutkan Alternatif Berdasarkan Jarak
+        // Tahap 6 : Urutkan Alternatif Berdasarkan Jarak
         const priority = Object.keys(distanceMatrix)
             .map((altId) => ({
                 alternatif: alternatif.find((alt) => alt.id == altId).nama,
@@ -123,64 +124,3 @@ export const getPrepareCalculation = async (req, res) => {
         res.status(500).json({ message: "Terjadi kesalahan pada server.", error: error.message });
     }
 };
-
-// export const addReport = async (req, res) => {
-//     const { userId, jumlah_alternatif } = req.body;
-//     try {
-//         const insertQuery = `INSERT INTO laporan ( user_id, jumlah_alternatif) VALUES (?, ?)`;
-//         await query(insertQuery, [userId, jumlah_alternatif]);
-//         res.status(201).json({ message: "Data berhasil ditambahkan." });
-//     } catch (error) {
-//         console.error("Error:", error);
-//         res.status(500).json({ message: "Terjadi kesalahan pada server.", error: error.message });
-//     }
-// }
-
-// export const getReport = async (req, res) => {
-//     try {
-//         const selectQuery = `SELECT laporan.id, users.id AS users_id,users.nama,users.jabatan,laporan.jumlah_alternatif,laporan.created_at FROM laporan INNER JOIN users ON laporan.user_id = users.id`;
-//         const results = await query(selectQuery);
-//         res.status(200).json(results);
-//     } catch (error) {
-//         console.error("Error:", error);
-//         res.status(500).json({ message: "Terjadi kesalahan pada server.", error: error.message });
-//     }
-// }
-
-// export const addResult = async (req, res) => {
-//     const { alternatif, score, laporan_id } = req.body;
-//     try {
-//         const insertQueryResult = `INSERT INTO perhitungan ( alternatif, score, laporan_id) VALUES (?, ?, ?)`;
-//         await query(insertQueryResult, [alternatif, score, laporan_id]);
-//         res.status(201).json({ message: "Data berhasil ditambahkan." });
-//     } catch (error) {
-//         console.error("Error:", error);
-//         res.status(500).json({ message: "Terjadi kesalahan pada server.", error: error.message });
-//     }
-// }
-
-// export const getResult = async (req, res) => {
-//     const { laporan_id } = req.params;
-//     try {
-//         const selectQuery = `SELECT * FROM perhitungan where laporan_id = ?`;
-//         const results = await query(selectQuery,laporan_id);
-//         res.status(200).json(results);
-//     } catch (error) {
-//         console.error("Error:", error);
-//         res.status(500).json({ message: "Terjadi kesalahan pada server.", error: error.message });
-//     }
-// }
-
-// export const resetResult = async (req, res) => {
-//     const { laporan_id } = req.params;
-//     try {
-//         const deleteQueryResult = `DELETE FROM perhitungan where laporan_id = ?`;
-//         const deleteQueryReport = `DELETE FROM laporan where id = ?`;
-//         await query(deleteQueryResult,laporan_id);
-//         await query(deleteQueryReport,laporan_id);
-//         res.status(200).json({ message: "Data berhasil dihapus." });
-//     } catch (error) {
-//         console.error("Error:", error);
-//         res.status(500).json({ message: "Terjadi kesalahan pada server.", error: error.message });
-//     }
-// }
