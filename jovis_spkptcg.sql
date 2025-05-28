@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.2
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost:3306
--- Generation Time: Mar 08, 2025 at 07:44 PM
--- Server version: 8.0.41-cll-lve
--- PHP Version: 8.3.17
+-- Host: 127.0.0.1
+-- Waktu pembuatan: 28 Bulan Mei 2025 pada 07.56
+-- Versi server: 10.4.32-MariaDB
+-- Versi PHP: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -24,41 +24,41 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `alternatif`
+-- Struktur dari tabel `alternatif`
 --
 
 CREATE TABLE `alternatif` (
-  `id` int NOT NULL,
+  `id` int(11) NOT NULL,
   `kode` varchar(50) NOT NULL,
   `nama` varchar(50) NOT NULL,
   `kelamin` varchar(50) NOT NULL,
   `alamat` varchar(50) NOT NULL,
-  `usia` int NOT NULL
+  `usia` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Dumping data for table `alternatif`
+-- Dumping data untuk tabel `alternatif`
 --
 
 INSERT INTO `alternatif` (`id`, `kode`, `nama`, `kelamin`, `alamat`, `usia`) VALUES
-(23, 'A2', 'Beby Salini', 'Perempuan', 'Jl. Abdul Hakim, Tanjung Sari, Kec Medan Selayang', 24),
-(24, 'A3', 'Dedek Afrizal', 'Laki Laki', 'Bukit Tempurung, Kuala Simpang, Kab. Aceh Tamiang', 33),
-(25, 'A4', 'Dimas Prasetio', 'Laki Laki', 'Kampung Klumpang, Kec. Hamparan Perak', 27),
-(26, 'A5', 'Febriara Hutasuhut', 'Perempuan', 'Sunggal, Kec. Medan Sunggal', 30),
-(28, 'A7', 'Mei Nanda Sari', 'Perempuan', 'Padang Bulan, Kec. Medan Baru', 25),
-(29, 'A8', 'Rizky Aditya', 'Laki Laki', 'Nangka, Kec. Binjai Utara, Kota Binjai', 27),
-(30, 'A9', 'Wahyu Nugroho', 'Laki Laki', 'Jl. Ngumban Surbakti, Kec. Medan Selayang', 25),
-(31, 'A1', 'Arizaldi', 'Laki Laki', 'Jl. Mesjid 28, Sunggal Kanan, kec. Medan Sunggal', 34),
-(32, 'A6', 'Fikri Haikal', 'Laki Laki', 'Bukit Rata, Kec. Kejurun Muda, Kab. Aceh Tamiang', 24);
+(35, 'A1', 'Arizaldi', 'Laki Laki', 'Jl. Mesjid 28, Sunggal Kanan, kec. Medan Sunggal', 34),
+(36, 'A2', 'Beby Salini', 'Perempuan', 'Jl. Abdul Hakim, Tanjung Sari, Kec Medan Selayang', 24),
+(37, 'A3', 'Dedek Afrizal', 'Laki Laki', 'Bukit Tempurung, Kuala Simpang, Kab. Aceh Tamiang', 33),
+(38, 'A4', 'Dimas Prasetio', 'Laki Laki', 'Kampung Klumpang, Kec. Hamparan Perak', 27),
+(39, 'A5', 'Febriara Hutasuhut', 'Perempuan', 'Sunggal, Kec. Medan Sunggal', 30),
+(40, 'A6', 'Fikri Haikal', 'Laki Laki', 'Bukit Rata, Kec. Kejurun Muda, Kab. Aceh Tamiang', 24),
+(41, 'A7', 'Mei Nanda Sari', 'Perempuan', 'Padang Bulan, Kec. Medan Baru', 25),
+(42, 'A8', 'Rizky Aditya', 'Laki Laki', 'Nangka, Kec. Binjai Utara, Kota Binjai', 27),
+(45, 'A9', 'Wahyu Nugroho', 'Laki Laki', 'Jl. Ngumban Surbakti, Kec. Medan Selayang', 25);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `kriteria`
+-- Struktur dari tabel `kriteria`
 --
 
 CREATE TABLE `kriteria` (
-  `id` int NOT NULL,
+  `id` int(11) NOT NULL,
   `kode` varchar(50) NOT NULL,
   `kriteria` varchar(50) NOT NULL,
   `jenis` varchar(50) NOT NULL,
@@ -67,71 +67,139 @@ CREATE TABLE `kriteria` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Dumping data for table `kriteria`
+-- Dumping data untuk tabel `kriteria`
 --
 
 INSERT INTO `kriteria` (`id`, `kode`, `kriteria`, `jenis`, `bobot`, `tipe`) VALUES
-(28, 'C1', 'Penguasaan teknik dan pengetahuan', 'Benefit', 0.3, 'Kuantitatif'),
-(29, 'C2', 'Penampilan definisi otot', 'Benefit', 0.2, 'Kualitatif'),
-(30, 'C3', 'Etika dan komunikasi', 'Benefit', 0.2, 'Kualitatif'),
-(31, 'C4', 'Pengalaman profesi', 'Benefit', 0.15, 'Kuantitatif'),
-(32, 'C5', 'Sertifikasi pelatihan / prestasi relevan', 'Benefit', 0.05, 'Kuantitatif'),
-(33, 'C6', 'Fleksibilitas jadwal latihan', 'Benefit', 0.05, 'Kualitatif'),
-(34, 'C7', 'Usia', 'Cost', 0.05, 'Kuantitatif');
+(39, 'C1', 'Penguasaan teknik dan pengetahuan', 'Benefit', 0.3, 'Kuantitatif'),
+(40, 'C2', 'Penampilan definisi otot', 'Benefit', 0.2, 'Kualitatif'),
+(41, 'C3', 'Etika dan komunikasi', 'Benefit', 0.2, 'Kualitatif'),
+(42, 'C4', 'Pengalaman profesi', 'Benefit', 0.15, 'Kuantitatif'),
+(43, 'C5', 'Sertifikasi pelatihan / prestasi relevan', 'Benefit', 0.05, 'Kuantitatif'),
+(44, 'C6', 'Fleksibilitas jadwal latihan', 'Benefit', 0.05, 'Kualitatif'),
+(46, 'C7', 'Usia', 'Cost', 0.05, 'Kuantitatif');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `penilaian`
+-- Struktur dari tabel `penilaian`
 --
 
 CREATE TABLE `penilaian` (
-  `id` int NOT NULL,
-  `alternatif_id` int NOT NULL,
-  `kriteria_id` int NOT NULL,
+  `id` int(11) NOT NULL,
+  `alternatif_id` int(11) NOT NULL,
+  `kriteria_id` int(11) NOT NULL,
   `nilai` varchar(65) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
+--
+-- Dumping data untuk tabel `penilaian`
+--
+
+INSERT INTO `penilaian` (`id`, `alternatif_id`, `kriteria_id`, `nilai`) VALUES
+(444, 35, 39, '84'),
+(445, 35, 40, '5'),
+(446, 35, 41, '5'),
+(447, 35, 42, '4'),
+(448, 35, 43, '3'),
+(449, 35, 44, '1'),
+(450, 35, 46, '34'),
+(451, 36, 39, '86'),
+(452, 36, 40, '4'),
+(453, 36, 41, '3'),
+(454, 36, 42, '0.5'),
+(455, 36, 43, '2'),
+(456, 36, 44, '1'),
+(457, 36, 46, '24'),
+(458, 37, 39, '78'),
+(459, 37, 40, '4'),
+(460, 37, 41, '2'),
+(461, 37, 42, '2'),
+(462, 37, 43, '1'),
+(463, 37, 44, '1'),
+(464, 37, 46, '33'),
+(465, 38, 39, '88'),
+(466, 38, 40, '4'),
+(467, 38, 41, '4'),
+(468, 38, 42, '2'),
+(469, 38, 43, '1'),
+(470, 38, 44, '2'),
+(471, 38, 46, '27'),
+(472, 39, 39, '92'),
+(473, 39, 40, '5'),
+(474, 39, 41, '3'),
+(475, 39, 42, '3.5'),
+(476, 39, 43, '3'),
+(477, 39, 44, '2'),
+(478, 39, 46, '30'),
+(479, 40, 39, '84'),
+(480, 40, 40, '3'),
+(481, 40, 41, '2'),
+(482, 40, 42, '1.5'),
+(483, 40, 43, '1'),
+(484, 40, 44, '2'),
+(485, 40, 46, '24'),
+(486, 41, 39, '90'),
+(487, 41, 40, '4'),
+(488, 41, 41, '3'),
+(489, 41, 42, '0'),
+(490, 41, 43, '1'),
+(491, 41, 44, '1'),
+(492, 41, 46, '25'),
+(493, 42, 39, '90'),
+(494, 42, 40, '3'),
+(495, 42, 41, '4'),
+(496, 42, 42, '2'),
+(497, 42, 43, '2'),
+(498, 42, 44, '2'),
+(499, 42, 46, '27'),
+(500, 45, 39, '94'),
+(501, 45, 40, '3'),
+(502, 45, 41, '3'),
+(503, 45, 42, '1'),
+(504, 45, 43, '1'),
+(505, 45, 44, '2'),
+(506, 45, 46, '25');
+
 -- --------------------------------------------------------
 
 --
--- Table structure for table `subkriteria`
+-- Struktur dari tabel `subkriteria`
 --
 
 CREATE TABLE `subkriteria` (
-  `id` int NOT NULL,
-  `kriteria_id` int NOT NULL,
+  `id` int(11) NOT NULL,
+  `kriteria_id` int(11) NOT NULL,
   `subkriteria` varchar(50) NOT NULL,
-  `bobot` int NOT NULL
+  `bobot` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Dumping data for table `subkriteria`
+-- Dumping data untuk tabel `subkriteria`
 --
 
 INSERT INTO `subkriteria` (`id`, `kriteria_id`, `subkriteria`, `bobot`) VALUES
-(65, 29, 'Sangat Baik', 5),
-(66, 30, 'Sangat Kurang', 1),
-(67, 33, 'Sedang', 2),
-(68, 30, 'Sangat Baik', 5),
-(69, 29, 'Baik', 4),
-(70, 29, 'Cukup', 3),
-(71, 29, 'Kurang', 2),
-(72, 29, 'Sangat Kurang', 1),
-(73, 30, 'Baik', 4),
-(74, 30, 'Cukup', 3),
-(75, 30, 'Kurang', 2),
-(76, 33, 'Tinggi', 3),
-(77, 33, 'Rendah', 1);
+(82, 40, 'Sangat baik', 5),
+(83, 40, 'Baik', 4),
+(84, 40, 'Cukup', 3),
+(85, 40, 'Kurang', 2),
+(86, 40, 'Sangat Kurang', 1),
+(87, 41, 'Sangat Baik', 5),
+(88, 41, 'Baik', 4),
+(89, 41, 'Cukup', 3),
+(90, 41, 'Kurang', 2),
+(91, 41, 'Sangat Kurang', 1),
+(92, 44, 'Ya', 2),
+(96, 44, 'Tidak', 1);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `users`
+-- Struktur dari tabel `users`
 --
 
 CREATE TABLE `users` (
-  `id` int NOT NULL,
+  `id` int(11) NOT NULL,
   `nama` varchar(50) NOT NULL,
   `jabatan` varchar(50) NOT NULL,
   `username` varchar(50) NOT NULL,
@@ -140,31 +208,32 @@ CREATE TABLE `users` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Dumping data for table `users`
+-- Dumping data untuk tabel `users`
 --
 
 INSERT INTO `users` (`id`, `nama`, `jabatan`, `username`, `password`, `refresh_token`) VALUES
-(2, 'Jovis Jocunda', 'Super Admin', 'jovis', '$2a$10$z8hSvAnfBacNBZyJEc/eHuH.z7qI1VXsgck87RYcwcrwc57a7hj4m', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjIsIm5hbWUiOiJKb3ZpcyBKb2N1bmRhIiwiamFiYXRhbiI6IlN1cGVyIEFkbWluIiwiaWF0IjoxNzQxNDM3NDY0LCJleHAiOjE3NDE1MjM4NjR9.nWd2hb8jrVzFtf4EDuWje9ziV0kboLUw20Dh8T4N6yk'),
-(6, 'Jamaluddin bas', 'Manajer', 'jamal', '$2a$10$PHwNlQWB4qwOrW2HgYzNIeuJcMkw4LPXWKd6RQp9trhSh78PzWPDu', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjYsIm5hbWUiOiJKYW1hbHVkZGluIGJhcyIsImphYmF0YW4iOiJNYW5hamVyIiwiaWF0IjoxNzM4MzAwMDMwLCJleHAiOjE3MzgzODY0MzB9.QtP4BJFDqsIUfIQcphO28kEB6GDvf2eDcKLKP0P7WHw');
+(2, 'Jovis Jocunda', 'Super Admin', 'jovis', '$2a$10$z8hSvAnfBacNBZyJEc/eHuH.z7qI1VXsgck87RYcwcrwc57a7hj4m', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjIsIm5hbWUiOiJKb3ZpcyBKb2N1bmRhIiwiamFiYXRhbiI6IlN1cGVyIEFkbWluIiwiaWF0IjoxNzQ4MTc5NjI2LCJleHAiOjE3NDgyNjYwMjZ9.384tLin1u-v-S1l6goO3URxuefr_Q9dmHDjQSKkl_oU'),
+(7, 'Jamalludin Basmalah', 'Manajer', 'jamal', '$2a$10$in4BBxH1E3xsWXtqfZ.M8eQQwCXAdPYB03OAMjYGifTIOBY6YQlmC', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjcsIm5hbWUiOiJKYW1hbGx1ZGluIEJhc21hbGFoIiwiamFiYXRhbiI6Ik1hbmFqZXIiLCJpYXQiOjE3NDI1NDUzMjUsImV4cCI6MTc0MjYzMTcyNX0.p_aPMlPRriWKUY5yFG58TMHWF1x0KiYeB2DjZRa7Tqk'),
+(8, 'Sefti Ibond', 'Koor. Personal Trainer', 'ibond', '$2a$10$/lez45MXkkR2J6SmYBydX.c1z6BX8QIpL4B1SBA6L4JIeLHKT3vpi', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjgsIm5hbWUiOiJTZWZ0aSBJYm9uZCIsImphYmF0YW4iOiJLb29yLiBQZXJzb25hbCBUcmFpbmVyIiwiaWF0IjoxNzQyNTQ1MzU1LCJleHAiOjE3NDI2MzE3NTV9.JSQG3FGPpL6Kn1LgU2rJHmFsh94EeA87N75AbkKDbX4');
 
 --
 -- Indexes for dumped tables
 --
 
 --
--- Indexes for table `alternatif`
+-- Indeks untuk tabel `alternatif`
 --
 ALTER TABLE `alternatif`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `kriteria`
+-- Indeks untuk tabel `kriteria`
 --
 ALTER TABLE `kriteria`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `penilaian`
+-- Indeks untuk tabel `penilaian`
 --
 ALTER TABLE `penilaian`
   ADD PRIMARY KEY (`id`),
@@ -172,68 +241,68 @@ ALTER TABLE `penilaian`
   ADD KEY `alternatif_id` (`alternatif_id`);
 
 --
--- Indexes for table `subkriteria`
+-- Indeks untuk tabel `subkriteria`
 --
 ALTER TABLE `subkriteria`
   ADD PRIMARY KEY (`id`),
   ADD KEY `kriteria_id` (`kriteria_id`);
 
 --
--- Indexes for table `users`
+-- Indeks untuk tabel `users`
 --
 ALTER TABLE `users`
   ADD PRIMARY KEY (`id`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- AUTO_INCREMENT untuk tabel yang dibuang
 --
 
 --
--- AUTO_INCREMENT for table `alternatif`
+-- AUTO_INCREMENT untuk tabel `alternatif`
 --
 ALTER TABLE `alternatif`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
 
 --
--- AUTO_INCREMENT for table `kriteria`
+-- AUTO_INCREMENT untuk tabel `kriteria`
 --
 ALTER TABLE `kriteria`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
 
 --
--- AUTO_INCREMENT for table `penilaian`
+-- AUTO_INCREMENT untuk tabel `penilaian`
 --
 ALTER TABLE `penilaian`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=366;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=507;
 
 --
--- AUTO_INCREMENT for table `subkriteria`
+-- AUTO_INCREMENT untuk tabel `subkriteria`
 --
 ALTER TABLE `subkriteria`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=82;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=97;
 
 --
--- AUTO_INCREMENT for table `users`
+-- AUTO_INCREMENT untuk tabel `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
--- Constraints for dumped tables
+-- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
 --
 
 --
--- Constraints for table `penilaian`
+-- Ketidakleluasaan untuk tabel `penilaian`
 --
 ALTER TABLE `penilaian`
   ADD CONSTRAINT `penilaian_ibfk_1` FOREIGN KEY (`kriteria_id`) REFERENCES `kriteria` (`id`) ON DELETE CASCADE,
   ADD CONSTRAINT `penilaian_ibfk_2` FOREIGN KEY (`alternatif_id`) REFERENCES `alternatif` (`id`) ON DELETE CASCADE;
 
 --
--- Constraints for table `subkriteria`
+-- Ketidakleluasaan untuk tabel `subkriteria`
 --
 ALTER TABLE `subkriteria`
-  ADD CONSTRAINT `subkriteria_ibfk_1` FOREIGN KEY (`kriteria_id`) REFERENCES `kriteria` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+  ADD CONSTRAINT `subkriteria_ibfk_1` FOREIGN KEY (`kriteria_id`) REFERENCES `kriteria` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
